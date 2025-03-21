@@ -1,0 +1,17 @@
+name: Exploring variables and secrets
+on:
+    push
+env:
+    CONTAINER_REGISTORY: docker.io
+    DOCKER_USERNAME: yagami6
+jobs:
+    docker:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Docker build
+              env: 
+                CONTAINER_REGISTORY: docker.io
+                DOCKER_USERNAME: yagami6
+              run: |
+                echo ${{ env.CONTAINER_REGISTORY }}
+                echo $DOCKER_USERNAME
