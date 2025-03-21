@@ -14,6 +14,10 @@ jobs:
               run: | 
                 chmod +x ascii-script.sh
                 ./ascii-script.sh
+            - uses: actions/upload-artifact@v4
+              with:
+                  name: dragon-txt-file
+                  path: dragon.txt
     second_job:
           needs: first_job
           runs-on: ubuntu-latest
@@ -24,12 +28,14 @@ jobs:
               run: |
                    echo "My first Github Actions Job"
                    ls -ltra
+            - uses: actions/download-artifact@v4
+              with:
+                  name: dragon-txt-file
             - name: Execute Shell script
-              run: | 
-                chmod +x ascii-script.sh
-                ./ascii-script.sh
+              run: cat dragon.txt
+
     third_job:
-          needs: [first_job,second_job]
+          needs: [first_job]
           runs-on: ubuntu-latest
           steps:
             - name: Checkout Repo
@@ -38,7 +44,8 @@ jobs:
               run: |
                    echo "My first Github Actions Job"
                    ls -ltra
+            - uses: actions/download-artifact@v4
+              with:
+                  name: dragon-txt-file
             - name: Execute Shell script
-              run: | 
-                chmod +x ascii-script.sh
-                ./ascii-script.sh
+              run: cat dragon.txt
