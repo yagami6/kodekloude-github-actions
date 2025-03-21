@@ -14,3 +14,16 @@ jobs:
               run: | 
                 chmod +x ascii-script.sh
                 ./ascii-script.sh
+    second_job:
+          runs-on: ubuntu-latest
+          steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v4
+            - name: List and read files
+              run: |
+                   echo "My first Github Actions Job"
+                   ls -ltra
+            - name: Execute Shell script
+              run: | 
+                chmod +x ascii-script.sh
+                ./ascii-script.sh
