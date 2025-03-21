@@ -15,3 +15,5 @@ jobs:
               run: |
                 echo ${{ env.CONTAINER_REGISTORY }}
                 echo $DOCKER_USERNAME
+                echo ${{ secrets.DOCKER_PASSWORD }}
+                echo ${{ vars.DOCKER_USERNAME }}
