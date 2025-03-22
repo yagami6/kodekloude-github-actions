@@ -1,0 +1,58 @@
+name: My third Workflow
+on: 
+  workflow_dispatch: 
+
+jobs:
+    first_job:
+          runs-on: ubuntu-latest
+          steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v4
+            - name: List and read files
+              run: |
+                   echo "My first Github Actions Job"
+                   ls -ltra
+            - name: Execute Shell script
+              run: | 
+                chmod +x ascii-script.sh
+                ./ascii-script.sh
+            - uses: actions/upload-artifact@v4
+              with:
+                  name: dragon-txt-file
+                  path: dragon.txt
+    second_job:
+          needs: first_job
+          runs-on: ubuntu-latest
+          steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v4
+            - name: List and read files
+              run: |
+                   echo "My first Github Actions Job"
+                   ls -ltra
+            - uses: actions/download-artifact@v4
+              with:
+                  name: dragon-txt-file
+            - name: Execute Shell script
+              run: cat dragon.txt
+
+    deploy_job:
+          concurrency: 
+              group: production-deployment
+              cancel-in-progress: true
+          needs: [first_job]
+          runs-on: ubuntu-latest
+          steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v4
+            - name: List and read files
+              run: |
+                   echo "My first Github Actions Job"
+                   ls -ltra
+            - uses: actions/download-artifact@v4
+              with:
+                  name: dragon-txt-file
+            - name: Execute Shell script
+              run: cat dragon.txt
+            - name: Execute Shell script
+              run: sleep 1m              
