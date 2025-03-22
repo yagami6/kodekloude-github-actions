@@ -1,6 +1,7 @@
-name: Exploring variables and secrets
+name: Chron trigger
 on:
-    push
+   schedule:
+     - cron: "*/1 * * * *" 
 env:
     CONTAINER_REGISTORY: docker.io
     DOCKER_USERNAME: yagami6
