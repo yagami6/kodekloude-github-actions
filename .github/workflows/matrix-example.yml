@@ -1,0 +1,20 @@
+name: My First Workflow
+on: push
+jobs:
+    first_job:
+          strategy:
+            matrix:
+              os: [ ubuntu-latest, ubuntu-20.04 ]
+              images: [ hello-world, alpine ]              
+          runs-on: ${{ matrix.images }}
+          steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v4
+            - name: List and read files
+              run: |
+                   echo "My first Github Actions Job"
+                   ls -ltra
+                   cat README.md
+                   sudo apt-get install cowsay -y
+            - name: Geneerate ASCI Artwork
+              run: cowsay -f dragon "Run for Cover ${{ matrix.images }}" >> dragon.txt
