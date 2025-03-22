@@ -6,5 +6,12 @@ jobs:
           runs-on: ubuntu-latest
           steps:
             - name: List and read files
+              id: readfile
               run: |
                    echo "My first Github Actions Job"
+                   echo "MYVALUE=apple" >> $GITHUB_OUTPUT
+                   echo "ENV_NAME=apple" >> $GITHUB_ENV
+            - name: List and read files
+              run: |
+                   echo ${{ steps.readfile.outputs.MYVALUE }}
+                   echo ${{ env.ENV_NAME }}
