@@ -39,7 +39,7 @@ jobs:
     deploy_job:
           concurrency: 
               group: production-deployment
-              cancel-in-progress: true
+              cancel-in-progress: false
           needs: [first_job]
           runs-on: ubuntu-latest
           steps:
