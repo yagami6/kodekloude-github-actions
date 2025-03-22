@@ -3,7 +3,7 @@ on:
   workflow_dispatch: 
 
 concurrency: 
-  group: ${{ github.workflow }}
+  group: ${{ github.ref }}
 
 jobs:
     first_job:
