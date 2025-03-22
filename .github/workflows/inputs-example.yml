@@ -1,0 +1,36 @@
+name: workflow distpatch
+on: 
+  workflow_dispatch: 
+    inputs:
+      run-test:
+        description: "Run Test"
+        type: boolean
+        required: true
+      test-type:
+        description: "Type of test to run"
+        type: choice
+        options:
+          - unit
+          - integer
+          - all
+      environment:
+        description: "Choose env"
+        type: environment
+        required: true
+      build-number:
+        description: "custom build number"
+        type: number
+        required: false
+jobs:
+    first_job:
+          runs-on: ubuntu-latest
+          steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v4
+            - name: List and read files
+              run: |
+                   echo ${{ inputs.build-number }}
+                   echo ${{ inputs.environment }}
+                   echo ${{ inputs.run-test }}
+                   echo ${{ inputs.test-type }}
+
