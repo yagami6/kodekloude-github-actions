@@ -41,7 +41,6 @@ jobs:
               run: cat dragon.txt
 
     deploy_job:
-          timeout-minutes: 2
           concurrency: 
               group: production-deployment
               cancel-in-progress: false
@@ -62,3 +61,6 @@ jobs:
             - name: Execute Shell script
               timeout-minutes: 1
               run: sleep 3m              
+            - name: Execute Shell script
+              run: cat dragon.txt
+              if: always()
