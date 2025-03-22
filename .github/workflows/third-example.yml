@@ -1,6 +1,7 @@
 name: My third Workflow
 on: 
   workflow_dispatch: 
+  push: 
 
 concurrency: 
   group: ${{ github.ref }}
